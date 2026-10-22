@@ -39,22 +39,33 @@ def signup(request):
     })
 
 def login_view(request):
-    if request.method == 'GET':
-        return render(request, 'login.html', {
-            'form': AuthenticationForm
-        })
-    else:
-        
-        UsuarioPersonalizado = get_user_model()
-        user = authenticate(UsuarioPersonalizado.objects.create_user(correo=request.POST['correo'], password=request.POST['password1']))
-        if user is None:
-            return render(request, 'login.html', {
-                'form': AuthenticationForm,
-                'error' : 'el correo o contraseña es incorrecto' 
-            })
-        else:
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+
+        if form.is_valid():
+            user = form.get_user()
+
+            # Verificar el estado de la cuenta antes de iniciar sesión
+            if user.estado_cuenta != user.EstadoCuenta.ACTIVA:
+                return render(request, "login.html", {
+                    "form": form,
+                    "error": "Tu cuenta no está activa. Contacta al administrador."
+                })
+
             login(request, user)
-            return redirect ('/dashboard')
+            return redirect("dashboard")
+
+        return render(request, "login.html", {
+            "form": form,
+            "error": "El correo o la contraseña son incorrectos."
+        })
+
+    form = AuthenticationForm(request)
+
+    return render(request, "login.html", {
+        "form": form
+    })
+
 
 
 @login_required
