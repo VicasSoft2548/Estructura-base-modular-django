@@ -78,5 +78,5 @@ class ContactoEmergencia(BaseModel):
     #id automatico
     empleado = models.ForeignKey("empleado.Empleado", on_delete=models.PROTECT, related_name="Empleado",)
     persona = models.ForeignKey("persona.Persona", on_delete=models.PROTECT, related_name="Contacto_de_Emergencia",)
-    familiar = models.ForeignKey("familia.Familiar", on_delete=models.PROTECT, related_name="Familiar")#############Cambiar
+    familiar = models.ForeignKey("familia.Familiar", on_delete=models.PROTECT, related_name="Familiar")
      

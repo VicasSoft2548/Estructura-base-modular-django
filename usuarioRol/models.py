@@ -3,30 +3,18 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 from core.models import BaseModel
-#Mantener 20 años de un usuarioRol con softdelete contratos, finiquitos, desvinculaciones y hojas de calculo de beneficios
-#planillas de sueldos, boletas de pago y registros de asistencia 5 años
-#documentacion de respaldos impositivos 8 años
-#aportes a la seguridad social minimo 10 años
-#los cvs y procesos de seleccion se conservan maximo 3 años 
-#al cumplirse los 5 años de la baja del empleado, traslada sus datos operativos a una base de datos histórica inmutable, cifrada y desconectada del software de uso diario de Recursos Humanos, conservando únicamente el acceso para el equipo Legal ante eventuales demandas de orden constitucional.
-#Create your models here.
+#Mantener 20 años de un usuarioRol con softdelete contratos, finiquitos, desvinculaciones y hojas de calculo de beneficios//planillas de sueldos, boletas de pago y registros de asistencia 5 años//documentacion de respaldos impositivos 8 años//#aportes a la seguridad social minimo 10 años//#los cvs y procesos de seleccion se conservan maximo 3 años //#al cumplirse los 5 años de la baja del empleado, traslada sus datos operativos a una base de datos histórica inmutable, cifrada y desconectada del software de uso diario de Recursos Humanos, conservando únicamente el acceso para el equipo Legal ante eventuales demandas de orden constitucional
 #USUARIO y base de auditoria y control
-
 class UsuarioManager(BaseUserManager):
     """
     Manager personalizado para manejar la creación de usuarios usando el correo electrónico
     como identificador principal en lugar de username.
     """
     def create_user(self, correo, password=None, **extra_fields):
-
         if not correo:
             raise ValueError("El correo electrónico es obligatorio.")
-
         correo = self.normalize_email(correo)
-
-        # No permitir que se cree una cuenta sin contraseña inicial
-        # mediante este método. Para invitaciones, se puede usar
-        # un flujo separado de activación y establecimiento de clave.
+        # No permitir que se cree una cuenta sin contraseña inicial, //# mediante este método. Para invitaciones, se puede usar //# un flujo separado de activación y establecimiento de clave.
         if not password:
             raise ValueError("Debes proporcionar una contraseña inicial.")
         

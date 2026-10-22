@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-(z8l+=8v#qpzpn)0@bjssml8p6xj19$-&umok!ox7f_1&d+n-f
 DEBUG = True
 
 ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
 AUTH_USER_MODEL = "usuarioRol.Usuario"
 
@@ -129,11 +130,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 
-LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = "dashboard"
-LOGOUT_REDIRECT_URL = "login"
+LOGIN_URL = '/usuarios/login/'
+LOGIN_REDIRECT_URL = "/usuarios/dashboard"
+LOGOUT_REDIRECT_URL = "/"
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / 'static'
+
 STATICFILES_DIRS = [
     BASE_DIR / "core" / "static",
 ]

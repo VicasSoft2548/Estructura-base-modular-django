@@ -19,11 +19,15 @@ from django.urls import include, path
 from django.http import HttpResponse
 from schema_graph.views import Schema
 
-def inicio(request):
-    return HttpResponse("Bienvenido al Sistema SyNat")
+# Puedes remover esta importación si no usas views directamente aquí
+from usuarioRol import views 
 
 urlpatterns = [
-    path("", include("core.urls")),
+    path("", views.home, name="home"),
     path('admin/', admin.site.urls),
     path('schema/', Schema.as_view()),
+    
+    # ─── AGREGA ESTA LÍNEA ───
+    # Esto registra tus rutas 'home' y 'signup' bajo el prefijo 'usuarios/'
+    path('usuarios/', include('usuarioRol.urls')), 
 ]

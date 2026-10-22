@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Signup</h1>
+{{error}}
+<form method="POST">
+    {% csrf_token %}
+    
+    <!-- Campo Obligatorio para el Correo Electrónico -->
+    <p>
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
+    </p>
+
+    <!-- Campo para la Contraseña -->
+    <p>
+        <label for="password1">Contraseña:</label>
+        <input type="password" name="password1" id="password1" required>
+    </p>
+
+    <!-- Campo para Repetir la Contraseña -->
+    <p>
+        <label for="password2">Confirmar contraseña:</label>
+        <input type="password" name="password2" id="password2" required>
+    </p>
+
+    <button type="submit">Signup</button>
+</form>
+
+
+{% endblock %}
